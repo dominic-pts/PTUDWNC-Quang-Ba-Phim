@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import MovieLogo from "../assets/homeTitle.webp";
 import backgroundImage from "../assets/home.jpg";
-import { FaPlay } from "react-icons/fa";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+// import { FaPlay } from "react-icons/fa";
+// import { AiOutlineInfoCircle } from "react-icons/ai";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import Slider from "../components/Slider";
 
 export default function Netflix() {
-   const [isScrolled, setIsScrolled] = useState(false);
-   const navigate = useNavigate();
+   // const navigate = useNavigate();
 
    const [movies, setMovies] = useState([]);
 
@@ -24,14 +23,10 @@ export default function Netflix() {
          });
    }, []);
 
-   window.onscroll = () => {
-      setIsScrolled(window.pageXOffset === 0 ? false : true);
-      return () => (window.onscroll = null);
-   };
 
    return (
       <Container>
-         <Navbar isScrolled={isScrolled} />
+         <Navbar />
          <div className="hero">
             <img
                src={backgroundImage}
@@ -43,16 +38,16 @@ export default function Netflix() {
                <div className="logo">
                   <img src={MovieLogo} alt="Movie Logo" />
                </div>
-               <div className="buttons flex">
-                  <button
+               <div className="buttons ">
+                  {/* <button
                      className="flex j-center a-center"
-                     onClick={() => navigate("/player")}
+                     onClick={() => navigate("/movies/:id")}
                   >
                      <FaPlay /> Play
-                  </button>
-                  <button className="flex j-center a-center">
+                  </button> */}
+                  {/* <button className="flex j-center a-center">
                      <AiOutlineInfoCircle /> More Info
-                  </button>
+                  </button> */}
                </div>
             </div>
          </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -6,103 +7,131 @@ import Navbar from "../components/Navbar";
 import { FcOvertime } from "react-icons/fc";
 import { BiTimeFive, BiLike } from "react-icons/bi";
 import { FiUserCheck } from "react-icons/fi";
+import ReactPlayer from "react-player";
+
+
 
 export default function Player() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const [movie, setMovie] = useState(null);
+
+
+  useEffect(() => {
+    (async () => {
+      const getMovieResponse = await getMovieById(id);
+      const getMovieTypeResponse = await getMovieTypeById(
+        getMovieResponse.data.movieTypeId
+      );
+
+      if (getMovieResponse.code === 1 && getMovieTypeResponse.code === 1) {
+        setMovie({
+          ...getMovieResponse.data,
+          movieTypeName: getMovieTypeResponse.data.name,
+        });
+      }
+    })();
+  }, []);
+
+  const getMovieById = async (id) => {
+    const res = await fetch(`http://localhost:5000/movies/${id}`);
+    return res.json();
+  };
+  const getMovieTypeById = async (id) => {
+    const res = await fetch(`http://localhost:5000/movieTypes/${id}`);
+    return res.json();
+  };
 
   return (
     <>
       <Navbar />
       <Container>
-        <div className="featured-movie">
-          <div className="row">
-            <div className="col-2">
-              <a href="#" title="Lật Mặt 6: Tấm Vé Định Mệnh">
-                <img
-                  alt="Lật Mặt 6: Tấm Vé Định Mệnh"
-                  src="https://cdn.moveek.com/storage/media/cache/short/643cd05155dc9009010254.jpeg"
-                />
-              </a>
-            </div>
-            <div className="col-6">
-              <div className="title">
-                <h2>Lật Mặt 6: Tấm Vé Định Mệnh</h2>
-                <span>Face Off 6: The Ticket Of Destiny - Action, Drama</span>
-              </div>
-              <div className="buttom">
-                <button className="btn mr-1">Yêu thích</button>
-                <button className="btn">Trailer</button>
-              </div>
-              <p>
-                Review Lật Mặt 6: Tấm Vé Định Mệnh và lịch chiếu Lật Mặt 6: Tấm
-                Vé Định Mệnh xem tại Moveek. Lật mặt 6 sẽ thuộc thể loại giật
-                gân, tâm lý pha hành động, hài hước.
-              </p>
-              <div className="col-4-2">
-                <div className="item">
-                  <span className="item_name">
-                    <BiLike className="icon" />
-                    <span>Hài lòng</span>
-                  </span>
-                  <h4>98%</h4>
+        {movie ? (
+          <>
+            <div className="featured-movie">
+              <div className="row">
+                <div className="col-2">
+                  <a href="#" title={movie.name}>
+                    <img alt={movie.name} src={movie.imageUrl} />
+                  </a>
                 </div>
+                <div className="col-6">
+                  <div className="title">
+                    <h2>{movie.name}</h2>
+                    <span>Thể loại: {movie.movieTypeName}</span>
+                  </div>
+                  <p>{movie.description}</p>
+                  <div className="col-4-2">
+                    <div className="item">
+                      <span className="item_name">
+                        <BiLike className="icon" />
+                        <span>Hài lòng</span>
+                      </span>
+                      <h4>98%</h4>
+                    </div>
 
-                <div className="item">
-                  <span className="item_name">
-                    <FcOvertime className="icon" />
-                    <span>Khởi chiếu</span>
-                  </span>
-                  <h4>28/04/2023</h4>
-                </div>
+                    <div className="item">
+                      <span className="item_name">
+                        <FcOvertime className="icon" />
+                        <span>Khởi chiếu</span>
+                      </span>
+                      <h4>{movie.premieredAt}</h4>
+                    </div>
 
-                <div className="item">
-                  <span>
-                    <BiTimeFive className="icon" />
-                    <span>Thời gian</span>
-                  </span>
-                  <h4>132 phút</h4>
-                </div>
+                    <div className="item">
+                      <span>
+                        <BiTimeFive className="icon" />
+                        <span>Thời gian</span>
+                      </span>
+                      <h4>{movie.time}</h4>
+                    </div>
 
-                <div className="item">
-                  <span>
-                    <FiUserCheck className="icon" />
-                    <span>Giới hạn độ tuổi</span>
-                  </span>
-                  <h4>16 tuổi</h4>
+                    <div className="item">
+                      <span>
+                        <FiUserCheck className="icon" />
+                        <span>Giới hạn độ tuổi</span>
+                      </span>
+                      <h4>{movie.ageLimit}</h4>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="item">
-                <span>Diễn viên</span>
-                <a href="#">Sơn, Long, Thảo, Huế</a>
-              </div>
-              <div className="item">
-                <span>Đạo diễn</span>
-                <a href="#">Lộc</a>
-              </div>
-              <div className="item">
-                <span>Nhà sản xuất</span>
-                <a href="#">Yến, Lâm</a>
+                <div className="col-4">
+                  <div className="item">
+                    <span>Diễn viên</span>
+                    <a href="#">{movie.performer}</a>
+                  </div>
+                  <div className="item">
+                    <span>Đạo diễn</span>
+                    <a href="#">{movie.director}</a>
+                  </div>
+                  <div className="item">
+                    <span>Nhà sản xuất</span>
+                    <a href="#">{movie.producer}</a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div className="back">
-          <BsArrowLeft onClick={() => navigate(-1)} />
-        </div>
-        <a className="player" id="movieTrailer">
-          <div className="youtube  mb-4">
-            <iframe
-              width="900"
-              height="600"
-              src="https://www.youtube.com/embed/uLmfetpadoU?hd=1"
-              frameborder="0"
-              allowfullscreen=""
-            ></iframe>
-          </div>
-        </a>
+            <div className="back">
+              <BsArrowLeft onClick={() => navigate(-1)} />
+            </div>
+            <a className="player" id="movieTrailer">
+              <div className="youtube  mb-4">
+              <ReactPlayer
+                url={movie.videoUrl}
+                width="100vw"
+                height="100vh"
+                playing={true}
+                controls={false}
+              />
+          
+              </div>
+            </a>
+          </>
+        ) : (
+          <h1 className="noFlim">Không tìm thấy phim</h1>
+        )}
       </Container>
     </>
   );
@@ -110,18 +139,25 @@ export default function Player() {
 
 const Container = styled.div`
   .featured-movie {
-    margin-top: 6rem;
+    margin-top: 7rem;
+    color: white !important;
     background-color: #12263f;
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 
     .row {
       display: flex;
       flex-wrap: wrap;
       padding: 2rem 5rem;
       .col-2 {
-        width: 200px;
+        width: 250px;
+        img {
+          width: 250px;
+          object-fit: contain;
+        }
       }
       .col-6 {
         padding-left: 2rem;
@@ -129,23 +165,17 @@ const Container = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
-        p {
-          /* margin-top: 3rem; */
-        }
         .col-4-2 {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
-          gap: 3rem;
+          gap: 2rem;
           text-align: start;
-          /* margin-top: 4rem; */
           .icon {
             margin-right: 0.3rem;
           }
         }
         .buttom {
-          
           .btn {
             padding: 0.5rem 1.5rem;
             font-size: 1rem;
@@ -161,7 +191,7 @@ const Container = styled.div`
         display: block;
         justify-items: center;
         margin-left: 2rem;
-       
+        width: 250px;
         .item {
           display: flex;
           flex-direction: column;
@@ -193,5 +223,12 @@ const Container = styled.div`
     height: 100vh;
     align-items: center;
     text-align: center;
+  }
+  .noFlim {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
   }
 `;

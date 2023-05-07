@@ -226,4 +226,6 @@ export default function MovieTypeMangager() {
       </>
    );
 }
-const Container = styled.div``;
+const Container = styled.div`
+
+`;

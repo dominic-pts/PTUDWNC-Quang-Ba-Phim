@@ -19,11 +19,12 @@ import Profile from "./pages/admin/pages/Profile";
 export default function App() {
    return ( 
       <BrowserRouter>
-         <Routes>
             {/* User */}
+         <Routes>
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/signup" element={<Signup />} />
-            <Route exact path="/player" element={<Player />} />
+            <Route exact path="/" element={<Netflix />} />
+            <Route exact path="/movies/:id" element={<Player />} />
             <Route exact path="/movies" element={<Movies />} />
             <Route exact path="/tvshows" element={<TVShows />} />
             <Route exact path="/mylist" element={<UserLiked />} />
@@ -34,7 +35,6 @@ export default function App() {
             <Route exact path="/admin/movie-type-manager" element={<MovieTypeMangager />} />
             <Route exact path="/admin/movie-manager" element={<MovieManager />} />
             <Route exact path="/admin/profile" element={<Profile />} />
-            <Route exact path="/" element={<Netflix />} />
          </Routes>
       </BrowserRouter>
    );

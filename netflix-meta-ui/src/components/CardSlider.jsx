@@ -1,13 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Card from "./Card";
 import styled from "styled-components";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-
-// React.memo là một hàm bao bọc một component bên trong một component hàm. 
-// Khi component gốc được render, React.memo sẽ kiểm tra xem props có thay đổi so với lần render 
+// React.memo là một hàm bao bọc một component bên trong một component hàm.
+// Khi component gốc được render, React.memo sẽ kiểm tra xem props có thay đổi so với lần render
 // trước hay không. Nếu props không thay đổi, React.memo sẽ không render lại component bên trong,
-//  mà chỉ sử dụng component đã render trước đó (được lưu trữ trong bộ nhớ đệm). Nếu props có thay đổi, React.memo sẽ render lại component bên trong với các props mới. 
+//  mà chỉ sử dụng component đã render trước đó (được lưu trữ trong bộ nhớ đệm). Nếu props có thay đổi, React.memo sẽ render lại component bên trong với các props mới.
 // Việc này giúp tăng hiệu suất của ứng dụng bằng cách giảm số lượng các rendering không cần thiết.
 
 export default React.memo(function CardSlider({ data, title }) {
@@ -26,7 +25,8 @@ export default React.memo(function CardSlider({ data, title }) {
       setSliderPositon(sliderPositon + 1);
     }
   };
-  
+
+
   return (
     <Container
       className="flex column"
@@ -68,7 +68,7 @@ const Container = styled.div`
   .wrapper {
     .slider {
       width: max-content;
-      gap: 1rem;
+      gap: 2rem;
       transform: translateX(0px);
       transition: 0.3s ease-in-out;
       margin-left: 50px;

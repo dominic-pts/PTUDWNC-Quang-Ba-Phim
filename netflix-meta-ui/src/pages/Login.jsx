@@ -76,8 +76,6 @@ export default function Login() {
 }
 
 const Container = styled.div`
-   /* position: relative; */
-
    .content {
       position: absolute;
       top: 0;

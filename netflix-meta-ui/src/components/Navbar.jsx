@@ -11,11 +11,14 @@ export default function Navbar({ isScrolled }) {
   const [inputHover, setInputHover] = useState(false);
   const links = [
     { name: "Home", link: "/" },
-    { name: "TV Shows", link: "/tv" },
+    { name: "TV Shows", link: "/tvshows" },
     { name: "Movies", link: "/movies" },
     { name: "My List", link: "/mylist" },
   ];
   const navigate = useNavigate();
+  const handleLogOut = () => {
+    navigate("/login")
+  };
   return (
     <Container>
       <nav className="flex">
@@ -57,7 +60,7 @@ export default function Navbar({ isScrolled }) {
             />
           </div>
           <button>
-            <FaPowerOff />
+            <FaPowerOff onClick={handleLogOut}/>
           </button>
         </div>
       </nav>

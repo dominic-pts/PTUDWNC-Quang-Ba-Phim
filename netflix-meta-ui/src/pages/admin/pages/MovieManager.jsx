@@ -152,6 +152,7 @@ export default function MovieTypeMangager() {
                      <th
                         style={{
                            padding: "8px 12px",
+                           width:"70px"
                         }}
                      >
                         #
@@ -159,6 +160,7 @@ export default function MovieTypeMangager() {
                      <th
                         style={{
                            padding: "8px 12px",
+                           width:"200px"
                         }}
                      >
                         Tên phim
@@ -166,6 +168,7 @@ export default function MovieTypeMangager() {
                      <th
                         style={{
                            padding: "8px 12px",
+                           width:"150px"
                         }}
                      >
                         Ảnh
@@ -173,6 +176,7 @@ export default function MovieTypeMangager() {
                      <th
                         style={{
                            padding: "8px 12px",
+                           width:"200px"
                         }}
                      >
                         Khởi chiếu lúc
@@ -180,6 +184,7 @@ export default function MovieTypeMangager() {
                      <th
                         style={{
                            padding: "8px 12px",
+                           width:"200px"
                         }}
                      >
                         Thời lượng
@@ -469,4 +474,9 @@ export default function MovieTypeMangager() {
       </>
    );
 }
-const Container = styled.div``;
+const Container = styled.div`
+.setBackGroud{
+
+  height: 3000px !important;
+
+}`;

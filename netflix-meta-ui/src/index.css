@@ -5,8 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000 important ;
-  color: white;
+  background-color: #000 !important ;
+  color: white !important;
 }
 :root {
   --red-color: #e50914;
@@ -50,7 +50,8 @@ body::-webkit-scrollbar{
   margin-left: 300px;
   background-color: white;
   width: 100vw;
-  height: 100vh;
+  height: 3000px !important;
   color: black;
   z-index: 100;
+  overflow: hidden;
 }

@@ -49,6 +49,7 @@ export default function UserManager() {
                   <th
                      style={{
                         padding: "8px 12px",
+                        width : "100px"
                      }}
                   >
                      #
@@ -56,11 +57,17 @@ export default function UserManager() {
                   <th
                      style={{
                         padding: "8px 12px",
+                        width : "200px"
                      }}
                   >
                      Email
                   </th>
-                  <th></th>
+                  <th style={{
+                        padding: "8px 12px",
+                        width : "200px"
+                     }}
+                  >
+                     Xoá</th>
                </tr>
             </thead>
             <tbody>
