@@ -1,7 +1,9 @@
 # Xây Dựng Web Quảng Bá Phim
 Thành Viên:
 + Phạm Thanh Sơn
-+ Nguyễn Phương Thảo
++ Nguyễn Bảo Lâm
++ Lâm Ngọc Yến
++ Vũ Quang Thanh
 --------------------------------
 + Xây dựng web Quản bá phim điện ảnh
 + Netflix meta được xây dựng bằng React, Redux Toolkit, Nodejs, MongoDB, và nhiều công nghệ khác...
