@@ -1,4 +1,4 @@
-# Xây Dựng Web Quảng Bá Phim
+# Xây Dựng Web Xem phim
 Thành Viên:
 + Phạm Thanh Sơn
 + Nguyễn Bảo Lâm
